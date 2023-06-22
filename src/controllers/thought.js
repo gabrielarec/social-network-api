@@ -4,20 +4,19 @@ const User = require("../models/user");
 //CREATE THOUGHT
 exports.createThought = async (req, res) => {
   try {
-    const userData = await User.findById(req.params.userId);
-    if (!userData) {
-      return res.status(400).json({ message: "UserId not found !!!" });
-    }
+    const thoughtData = await Thought.create(req.body);
+    
 
-    const newThought = new Thought(req.body);
-    await newThought.save();
+
 
     const user = await User.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $push: { thoughts: newThought._id } },
+      { _id: req.body.userId },
+      { $push: { thoughts: thoughtData._id } },
       { new: true, runValidators: true }
     );
-
+    if (!user) {
+      return res.status(400).json({ message: "UserId not found !!!" });
+    }
     res.status(201).json({
       message: "Thought created successfully !!!",
       user,

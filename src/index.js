@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 2000;
+const PORT = 3001;
 
 //MONGODB CONNECTION
 require("./db/connection");

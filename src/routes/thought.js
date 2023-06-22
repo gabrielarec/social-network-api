@@ -11,7 +11,7 @@ const {
 
 const router = express.Router();
 
-router.post("/thoughts/:userId", createThought);
+router.post("/thoughts/", createThought);
 router.get("/thoughts", getAllThought);
 router.delete("/thoughts/:id", deleteThought);
 router.put("/thoughts/:id", updateThought);
